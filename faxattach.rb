@@ -6,11 +6,6 @@ require './sinatra/faxattach_helpers'
 class FaxAttach < Sinatra::Base
   helpers Sinatra::FaxAttachHelpers
 
-  get '/*' do
-    "hello world"
-    status 405
-  end
-
   put '/*' do
     status 405
   end
@@ -38,15 +33,14 @@ class FaxAttach < Sinatra::Base
   post '/process' do
     path = params[:path]
     begin
-      file = download path
+      file = download path, 'attachments/'
     rescue
       status 404
     end
 
-    code = extractCode file
+    code = extractCode file, 'attachments/'
     content_type :json
     {code: code}.to_json
   end
-
 end
 
