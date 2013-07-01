@@ -6,6 +6,10 @@ require './sinatra/faxattach_helpers'
 class FaxAttach < Sinatra::Base
   helpers Sinatra::FaxAttachHelpers
 
+  get '/' do
+    "Hello world"
+  end
+  
   put '/*' do
     status 405
   end
