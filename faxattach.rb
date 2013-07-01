@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'docsplit'
+require 'json'
 require './sinatra/faxattach_helpers'
 
 class FaxAttach < Sinatra::Base
@@ -37,16 +38,14 @@ class FaxAttach < Sinatra::Base
   post '/process' do
     path = params[:path]
     begin
-      debugger
-      file = test_download path
+      file = download path
     rescue
       status 404
     end
 
-    debugger
     code = extractCode file
-    code
-    status 202
+    content_type :json
+    {code: code}.to_json
   end
 
 end
