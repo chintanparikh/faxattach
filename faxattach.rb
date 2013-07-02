@@ -44,7 +44,7 @@ class FaxAttach < Sinatra::Base
 
     code = extractCode file, 'attachments/'
     content_type :json
-    {code: code}.to_json
+    {:code => code}.to_json
   end
 end
 
