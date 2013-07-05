@@ -5,7 +5,7 @@ set :stages, %w(production staging development)
 set :default_stage, "staging"
 
 set :rvm_ruby_string, 'ruby-1.9.3-p327@faxattach'
-set :rvm_type, :user
+set :rvm_type, :system
 
 # Bundler tasks
 # require 'bundler/capistrano'
@@ -24,7 +24,7 @@ set :group, 'faxattach'
 set :runner, 'faxattach'
 
 # Where will it be located on the server?
-set :deploy_to, "/srv/#{application}"
+set :deploy_to, "/srv/www/#{application}"
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
