@@ -1,5 +1,5 @@
 # define paths and filenames
-deploy_to = "/srv/faxattach"
+deploy_to = "/srv/www/faxattach"
 rails_root = "#{deploy_to}/current"
 pid_file = "#{deploy_to}/shared/pids/unicorn.pid"
 socket_file= "#{deploy_to}/shared/unicorn.sock"
