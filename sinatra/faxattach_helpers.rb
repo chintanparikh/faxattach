@@ -20,7 +20,8 @@ module Sinatra
       txt = path.gsub('pdf', 'txt')
       code = match(txt)
       # For some reason, the OCR adds spaces which throws off the CoverPage detection
-      code.delete(' ')
+      code = code.delete(' ')
+      code
     end
 
     def match file
