@@ -18,12 +18,19 @@ module Sinatra
     def extractCode file_path, out = nil
       path = Docsplit.extract_text(file_path, clean: false, output: out)[0]
       txt = path.gsub('pdf', 'txt')
-      code = nil
-      File.open(txt).each do |line|
-        # grabs the last non empty line and removes any additional characters
-        code = line.chomp unless (line.chomp.empty? || line == "\f")
+      code = match(txt)
+      # For some reason, the OCR adds spaces which throws off the CoverPage detection
+      code.delete(' ')
+    end
+
+    def match file
+      regex = /^(ADN[\s|\S]*)$/
+      File.open(file) do |line|
+        match = line.match(regex)
+        unless match.nil?
+          return match[0]
+        end
       end
-      code
     end
   end
 end
