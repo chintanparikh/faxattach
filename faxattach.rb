@@ -36,6 +36,7 @@ class FaxAttach < Sinatra::Base
 
   post '/process' do
     path = params[:path]
+    local = params[:local]
     begin
       file = download path, 'attachments/'
     rescue
@@ -43,8 +44,9 @@ class FaxAttach < Sinatra::Base
     end
 
     code = extractCode file, 'attachments/'
-    content_type :json
-    {:code => code}.to_json
+    
+    notifyAidin local, code
+    status 200
   end
 end
 
