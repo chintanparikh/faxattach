@@ -37,6 +37,9 @@ class FaxAttach < Sinatra::Base
   post '/process' do
     path = params[:path]
     local = params[:local]
+    
+    # For development
+    path.gsub!('https', 'http')
     begin
       file = download path, 'attachments/'
     rescue

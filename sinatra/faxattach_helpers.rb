@@ -3,6 +3,7 @@ require 'open-uri'
 require 'debugger'
 require 'fileutils'
 require 'net/http'
+require 'rest-client'
 module Sinatra
   module FaxAttachHelpers
   
@@ -20,22 +21,24 @@ module Sinatra
       txt = path.gsub('pdf', 'txt')
       code = match(txt)
       # For some reason, the OCR adds spaces which throws off the CoverPage detection
-      code = code.delete(' ')
+      code = code.delete(' ').strip 
       code
     end
 
     def match file
       regex = /^(ADN[\s|\S]*)$/
-      File.open(file) do |line|
-        match = line.match(regex)
-        unless match.nil?
-          return match[0]
+      File.open(file) do |file_handle|
+        file_handle.each_line do |line|  
+          match = line.match(regex)
+          unless match.nil?
+            return match[0]
+          end
         end
       end
     end
 
     def notifyAidin local, code
-      url = "https://app.staging.myaidin.com/api/attachments/register"
+      url = "http://app.myaidin.site:3000/api/attachments/register"
       puts "#notifyAidin with url: #{url}"
       params = {:code => code, local: local }
       RestClient.post url, params
