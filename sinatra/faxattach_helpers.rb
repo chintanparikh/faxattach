@@ -38,7 +38,7 @@ module Sinatra
     end
 
     def notifyAidin local, code
-      url = "http://app.myaidin.site:3000/api/attachments/register"
+      url = "http://app.staging.myaidin.com/api/attachments/register"
       puts "#notifyAidin with url: #{url}"
       params = {:code => code, local: local }
       RestClient.post url, params
