@@ -6,6 +6,12 @@ require './sinatra/faxattach_helpers'
 class FaxAttach < Sinatra::Base
   helpers Sinatra::FaxAttachHelpers
 
+  configure do
+    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+    file.sync = true
+    use Rack::CommonLogger, file
+  end
+
   get '/' do
     "Hello world"
   end
