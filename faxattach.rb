@@ -4,13 +4,10 @@ require 'json'
 require './sinatra/faxattach_helpers'
 
 class FaxAttach < Sinatra::Base
+  set :root, '/srv/www/faxattach/current'
   helpers Sinatra::FaxAttachHelpers
 
-  configure do
-    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
-    file.sync = true
-    use Rack::CommonLogger, file
-  end
+  register(Sinatra::Logger)
 
   get '/' do
     "Hello world"
