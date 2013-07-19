@@ -2,6 +2,7 @@ require 'sinatra'
 require 'docsplit'
 require 'json'
 require './sinatra/faxattach_helpers'
+require 'logger'
 
 class FaxAttach < Sinatra::Base
   helpers Sinatra::FaxAttachHelpers
