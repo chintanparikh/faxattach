@@ -8,7 +8,7 @@ set :rvm_ruby_string, 'ruby-1.9.3-p327@faxattach'
 set :rvm_type, :system
 
 # Bundler tasks
-# require 'bundler/capistrano'
+require 'bundler/capistrano'
 set :application, 'faxattach'
 set :apikey, 'MHaBUh3Kctz2x500l5LPMFjo9LNLDKfl6EHF69C1Fq2WrIuB66yw6k5xj30dI17IZ'
 set :ssh_options, {forward_agent: true}
