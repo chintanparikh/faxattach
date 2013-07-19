@@ -7,9 +7,7 @@ class FaxAttach < Sinatra::Base
   helpers Sinatra::FaxAttachHelpers
 
   configure do
-    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
-    file.sync = true
-    use Rack::CommonLogger, file
+    logger = Logger.new("#{settings.root}/log/#{settings.environment}.log")
   end
 
   get '/' do
