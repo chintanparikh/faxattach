@@ -37,16 +37,23 @@ class FaxAttach < Sinatra::Base
   post '/process' do
     path = params[:path]
     local = params[:local]
+    logger.info path
+    logger.info local
     
     # For development
     path.gsub!('https', 'http')
+    
+    logger.info path
+
     begin
       file = download path, 'attachments/'
+      logger.info file
     rescue
       status 404
     end
 
     code = extractCode file, 'attachments/'
+    logger.info code
     
     notifyAidin local, code
     status 200
