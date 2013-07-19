@@ -4,10 +4,7 @@ require 'json'
 require './sinatra/faxattach_helpers'
 
 class FaxAttach < Sinatra::Base
-  set :root, '/srv/www/faxattach/current'
   helpers Sinatra::FaxAttachHelpers
-
-  register(Sinatra::Logger)
 
   get '/' do
     "Hello world"
