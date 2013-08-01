@@ -49,3 +49,11 @@ Clone this repository, ```cd``` into it, and run ```bundle install```
 After this, you can start FaxAttach by running ```rackup``` inside the FaxAttach directory. Keep in mind you may have to change the paths in ```faxattach.rb``` in Aidin to test locally. You'll want to change the FaxAttach path to ```localhost:9292``` instead of ```faxattach.staging.myaidin.com```
 
 To push changes to staging, make sure you've committed and pushed your changes to github, then run ```cap deploy```
+
+### Testing locally
+Once you have the app running with ```rackup``` you now need to make sure it works.
+
+Open up CyberDuck (or something similar), and get a signed url for an example scanned pdf. Go to your terminal, and type
+```curl --data "path=URL&local=something.pdf" http://localhost:9292/process```
+
+Replace URL with the signed url you have. Local doesn't matter at this point, it's only important when you're running FaxAttach through the Aidin app.
